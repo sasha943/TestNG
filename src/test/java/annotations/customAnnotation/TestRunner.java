@@ -1,15 +1,19 @@
 package annotations.customAnnotation;
 
 import com.worldapp.testng.annotations.WorldAppTest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public class TestRunner {
 
+    private static final Logger LOG = LoggerFactory.getLogger(TestRunner.class);
+
     public static void main(String[] args) {
 
-        System.out.println("Testing...");
+        LOG.info("Testing...");
 
         int passed = 0, failed = 0, count = 0, ignore = 0;
 
@@ -26,22 +30,22 @@ public class TestRunner {
 
                     try {
                         method.invoke(obj.newInstance());
-                        System.out.printf("%s - Test '%s' - passed %n", ++count, method.getName());
+                        LOG.warn("{} - Test {} - passed", ++count, method.getName());
                         passed++;
                     } catch (Throwable ex) {
-                        System.out.printf("%s - Test '%s' - failed: %s %n", ++count, method.getName(), ex.getCause());
+                        LOG.error("{} - Test; - failed: {} {}", ++count, method.getName(), ex.getCause());
                         failed++;
                     }
 
                 } else {
-                    System.out.printf("%s - Test '%s' - ignored%n", ++count, method.getName());
+                    LOG.warn("{} Test; {} - ignored", ++count, method.getName());
                     ignore++;
                 }
 
             }
 
         }
-        System.out.printf("%nResult : Total : %d, Passed: %d, Failed %d, Ignore %d%n", count, passed, failed, ignore);
 
+        LOG.info("Result : Total : {}, Passed: {}, Failed {}, Ignore {}", count, passed, failed, ignore);
     }
 }

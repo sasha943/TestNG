@@ -2,6 +2,8 @@ package listeners;
 
 import com.codeborne.selenide.Selenide;
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.*;
 import org.testng.xml.XmlSuite;
 
@@ -16,24 +18,25 @@ import java.util.Map;
 
 public class WorldAppTestListener implements ITestListener, IReporter {
 
+    private static final Logger LOG = LoggerFactory.getLogger(WorldAppTestListener.class);
     private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     @Override
     public void onTestStart(ITestResult result) {
-        System.out.println("Test with name " + result.getName() + " started on " + dateFormat.format(new Date()));
+        LOG.info("Test with name {} started on {}", result.getName(), dateFormat.format(new Date()));
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        System.out.println("Test with name " + result.getName() + " passed");
+        LOG.info("Test with name {} passed", result.getName());
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
         String testName = result.getName();
         if (!result.isSuccess()) {
-            System.out.println("test: " + testName + "failed " + dateFormat.format(new Date()));
-            System.out.println("make screenshots for test: " + testName);
+            LOG.info("test: {} failed {}", testName, dateFormat.format(new Date()));
+            LOG.info("make screenshots for test: {}", testName);
             Selenide.screenshot(new File("/src/test/resources/screenshots").getAbsolutePath());
         }
     }
