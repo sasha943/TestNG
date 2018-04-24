@@ -1,0 +1,8 @@
+name: WorldAppSuit
+threadCount: 1
+
+tests:
+  - name: Regression
+    excludedGroups: [broken]
+    classes:
+      - tests.TestWithoutListeners

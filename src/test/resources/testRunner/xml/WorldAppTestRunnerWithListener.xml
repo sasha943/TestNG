@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite" verbose="1" >
+    <listeners>
+        <listener class-name="listeners.WorldAppTestListener"></listener>
+    </listeners>
+    <test name="Regression">
+        <groups>
+            <run>
+                <exclude name="broken"></exclude>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.TestWithoutListeners"></class>
+        </classes>
+    </test>
+</suite>
