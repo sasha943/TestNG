@@ -1,0 +1,20 @@
+.gradle
+/build
+/buildSrc/build
+
+# IDEA
+# ----
+.idea
+.shelf
+/*.iml
+/*.ipr
+/*.iws
+/buildSrc/.idea
+/buildSrc/.shelf
+/buildSrc/*.iml
+/buildSrc/*.ipr
+/buildSrc/*.iws
+/buildSrc/out
+/buildSrc/subprojects/*/*.iml
+/buildSrc/subprojects/*/out
+/out
